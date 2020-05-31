@@ -6,7 +6,6 @@
 
     using Blog.Common;
     using Blog.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 

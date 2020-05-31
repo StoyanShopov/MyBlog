@@ -6,7 +6,6 @@
 
     using Blog.Data.Common.Models;
     using Blog.Data.Common.Repositories;
-
     using Microsoft.EntityFrameworkCore;
 
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>

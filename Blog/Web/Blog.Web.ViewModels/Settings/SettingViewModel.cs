@@ -1,9 +1,8 @@
 ﻿namespace Blog.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using Blog.Data.Models;
     using Blog.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

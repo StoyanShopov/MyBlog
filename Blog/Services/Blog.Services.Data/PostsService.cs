@@ -8,13 +8,14 @@
 
     using Blog.Data.Common.Repositories;
     using Blog.Data.Models;
+    using Blog.Services.Data.Common;
+    using Blog.Services.Data.Contracts;
+    using Blog.Services.Mapping;
+    using Blog.Web.ViewModels.Administration.Posts.InputModels;
     using CloudinaryDotNet;
-    using Common;
-    using Mapping;
     using Microsoft.EntityFrameworkCore;
-    using Web.ViewModels.Administration.Posts.InputModels;
 
-    public class PostsService
+    public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<Post> postRepository;
         private readonly IDeletableEntityRepository<Category> categoryRepository;
@@ -99,10 +100,10 @@
                 .To<TModel>()
                 .FirstOrDefault();
 
-        public IEnumerable<TModel> GetLastCreatedPosts<TModel>(int defaultCount = 5)
+        public IEnumerable<TModel> GetLastCreatedPosts<TModel>(int defaultCount = 3)
             => this.postRepository
                 .AllAsNoTracking()
-                .OrderBy(x => x.CreatedOn)
+                .OrderByDescending(x => x.CreatedOn)
                 .To<TModel>()
                 .Take(defaultCount)
                 .ToList();

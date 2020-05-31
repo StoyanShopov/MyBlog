@@ -6,8 +6,8 @@
 
     using Blog.Data.Common.Repositories;
     using Blog.Data.Models;
+    using Blog.Services.Data.Contracts;
     using Blog.Services.Mapping;
-    using Contracts;
     using Microsoft.EntityFrameworkCore;
 
     public class CategoriesService : ICategoriesService

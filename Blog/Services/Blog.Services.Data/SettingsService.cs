@@ -5,8 +5,8 @@
 
     using Blog.Data.Common.Repositories;
     using Blog.Data.Models;
+    using Blog.Services.Data.Contracts;
     using Blog.Services.Mapping;
-    using Contracts;
 
     public class SettingsService : ISettingsService
     {

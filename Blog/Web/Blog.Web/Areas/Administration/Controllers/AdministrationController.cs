@@ -2,7 +2,6 @@
 {
     using Blog.Common;
     using Blog.Web.Controllers;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

@@ -8,11 +8,8 @@
     using Blog.Data.Common.Repositories;
     using Blog.Data.Models;
     using Blog.Data.Repositories;
-
     using Microsoft.EntityFrameworkCore;
-
     using Moq;
-
     using Xunit;
 
     public class SettingsServiceTests

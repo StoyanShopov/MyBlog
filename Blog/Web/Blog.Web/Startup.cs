@@ -9,6 +9,7 @@
     using Blog.Data.Repositories;
     using Blog.Data.Seeding;
     using Blog.Services.Data;
+    using Blog.Services.Data.Contracts;
     using Blog.Services.Mapping;
     using Blog.Services.Messaging;
     using Blog.Web.ViewModels;
@@ -21,7 +22,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Services.Data.Contracts;
 
     public class Startup
     {
@@ -66,6 +66,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IPostsService, PostsService>();
 
             // Cloudinary Setup
             var cloudinaryAccount = new Account(

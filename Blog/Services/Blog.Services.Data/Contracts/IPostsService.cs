@@ -5,7 +5,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    using Web.ViewModels.Administration.Posts.InputModels;
+    using Blog.Web.ViewModels.Administration.Posts.InputModels;
 
     public interface IPostsService
     {
@@ -21,7 +21,7 @@
 
         TModel GetById<TModel>(int id);
 
-        IEnumerable<TModel> GetLastCreatedPosts<TModel>(int defaultCount = 5);
+        IEnumerable<TModel> GetLastCreatedPosts<TModel>(int defaultCount = 3);
 
         IEnumerable<TModel> GetByPage<TModel>(int take, int skip);
     }

@@ -12,10 +12,9 @@
     using Blog.Data.Repositories;
     using Blog.Data.Seeding;
     using Blog.Services.Data;
+    using Blog.Services.Data.Contracts;
     using Blog.Services.Messaging;
-
     using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

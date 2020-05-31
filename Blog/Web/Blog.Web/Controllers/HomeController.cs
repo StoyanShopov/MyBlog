@@ -2,15 +2,26 @@
 {
     using System.Diagnostics;
 
+    using Blog.Services.Data.Contracts;
     using Blog.Web.ViewModels;
-
+    using Blog.Web.ViewModels.Posts.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
+        private readonly IPostsService postsService;
+
+        public HomeController(IPostsService postsService)
+        {
+            this.postsService = postsService;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var latestPosts = this.postsService
+                .GetLastCreatedPosts<IndexPostViewModel>();
+
+            return this.View(latestPosts);
         }
 
         public IActionResult Privacy()
