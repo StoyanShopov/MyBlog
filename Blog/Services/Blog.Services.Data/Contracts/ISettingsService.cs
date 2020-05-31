@@ -1,4 +1,4 @@
-﻿namespace Blog.Services.Data
+﻿namespace Blog.Services.Data.Contracts
 {
     using System.Collections.Generic;
 

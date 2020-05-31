@@ -13,14 +13,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.4" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+	      <PackageReference Include="Cloudinary.Core" Version="1.31.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Blog.Data.Common\Blog.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Blog.Data.Models\Blog.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\Blog.Web.ViewModels\Blog.Web.ViewModels.csproj" />
     <ProjectReference Include="..\Blog.Services.Mapping\Blog.Services.Mapping.csproj" />
   </ItemGroup>
 
