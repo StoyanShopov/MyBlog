@@ -9,6 +9,7 @@
     using Blog.Web.ViewModels.Settings;
 
     using Microsoft.AspNetCore.Mvc;
+    using Services.Data.Contracts;
 
     public class SettingsController : BaseController
     {

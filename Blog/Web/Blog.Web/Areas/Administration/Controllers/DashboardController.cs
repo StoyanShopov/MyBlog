@@ -4,6 +4,7 @@
     using Blog.Web.ViewModels.Administration.Dashboard;
 
     using Microsoft.AspNetCore.Mvc;
+    using Services.Data.Contracts;
 
     public class DashboardController : AdministrationController
     {

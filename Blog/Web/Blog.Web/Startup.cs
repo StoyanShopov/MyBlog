@@ -12,7 +12,7 @@
     using Blog.Services.Mapping;
     using Blog.Services.Messaging;
     using Blog.Web.ViewModels;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -21,6 +21,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Services.Data.Contracts;
 
     public class Startup
     {
@@ -64,6 +65,16 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
+
+            // Cloudinary Setup
+            var cloudinaryAccount = new Account(
+                this.configuration["Cloudinary:CloudName"],
+                this.configuration["Cloudinary:APIKey"],
+                this.configuration["Cloudinary:APISecret"]);
+
+            var cloudinary = new Cloudinary(cloudinaryAccount);
+            services.AddSingleton(cloudinary);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

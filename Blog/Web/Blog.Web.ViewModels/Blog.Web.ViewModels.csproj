@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.4" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -21,6 +22,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Blog.Data.Models\Blog.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\Blog.Services.Mapping\Blog.Services.Mapping.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Administration\Posts\ViewModels\" />
   </ItemGroup>
 
 </Project>
