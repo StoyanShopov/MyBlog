@@ -5,7 +5,6 @@ namespace Blog.Data.Models
     using System.Collections.Generic;
 
     using Blog.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
@@ -16,6 +15,7 @@ namespace Blog.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Comments = new HashSet<Comment>();
         }
 
         // Audit info
@@ -23,15 +23,20 @@ namespace Blog.Data.Models
 
         public DateTime? ModifiedOn { get; set; }
 
-        // Deletable entity
+        public string Biography { get; set; }
+
+        public string ProfilePicture { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
 
-        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
+        public ICollection<Comment> Comments { get; set; }
 
-        public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
+        public ICollection<IdentityUserRole<string>> Roles { get; set; }
 
-        public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+        public ICollection<IdentityUserClaim<string>> Claims { get; set; }
+
+        public ICollection<IdentityUserLogin<string>> Logins { get; set; }
     }
 }

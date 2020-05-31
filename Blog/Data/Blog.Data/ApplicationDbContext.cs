@@ -24,6 +24,20 @@
         {
         }
 
+        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<PostCategory> PostsCategories { get; set; }
+
+        public DbSet<TagPost> TagsPosts { get; set; }
+
+        public DbSet<Email> Emails { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
@@ -72,6 +86,13 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            // Set composite keys
+            builder.Entity<PostCategory>()
+                .HasKey(k => new { k.CategoryId, k.PostId });
+
+            builder.Entity<TagPost>()
+                .HasKey(k => new { k.TagId, k.PostId });
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

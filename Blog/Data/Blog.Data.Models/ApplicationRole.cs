@@ -4,7 +4,6 @@ namespace Blog.Data.Models
     using System;
 
     using Blog.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
