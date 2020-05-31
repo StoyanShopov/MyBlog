@@ -1,0 +1,91 @@
+﻿@using System.Globalization
+@using Blog.Web.ViewModels.Posts.ViewModels;
+@model AllPostViewModel;
+
+@using Blog.Common
+@{
+    this.ViewData["Title"] = "Post All";
+}
+
+<div class="row">
+    <div class="container bg-white">
+        <div class="row">
+            @foreach (var item in Model.Posts)
+            {
+                <div class="post col-xl-4 mt-3">
+                    <div class="post-thumbnail">
+                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">
+                            <img src="@item.ImageUrl" class="img-fluid">
+                        </a>
+                    </div>
+                    <div class="post-details bg-white">
+                        <div class="post-meta d-flex justify-content-between">
+                            <div class="category">
+                                @*@foreach (var tag in item.tz)
+                                {
+                                    <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag">@tag</a>
+                                }*@
+                            </div>
+                        </div>
+                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">
+                            <h3 class="h4">@item.Title</h3>
+                        </a>
+                        <p class="text-muted">@item.ShortDescription</p>
+                        <footer class="post-footer d-flex align-items-center">
+                            <a class="author d-flex align-items-center flex-wrap">
+                                <div class="avatar">
+                                    <img src="@item.Author" class="img-fluid">
+                                </div>
+                                <div class="title">
+                                    <span class="font-weight-bold text-dark">@item.Author</span>
+                                </div>
+                            </a>
+                        </footer>
+                        <form id="likesForm" method="post"></form>
+                        <div class="post-meta d-flex justify-content-between">
+                            <div cclass="meta">
+                                @item.CreatedOn.Date.Day @item.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture) @item.CreatedOn.Date.Year
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="mt-4">
+    @if (Model.PagesCount > 0)
+    {
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-template d-flex justify-content-center">
+                <li class="page-item">
+                    <a href="/Posts/All/?page=@Model.PreviousPage" class="page-link bg-dark text-white">
+                        <i class="fa fa-angle-left">
+                        </i>
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= Model.PagesCount; i++)
+                {
+                    if (i == Model.CurrentPage)
+                    {
+                        <li class="page-item">
+                            <a href="/Posts/All/?page=@i" class="page-link bg-dark text-white active">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a href="/Posts/All/?page=@i" class="page-link active bg-dark text-white">@i</a>
+                        </li>
+                    }
+                }
+                <li class="page-item">
+                    <a href="/Posts/All/?page=@Model.NextPage" class="page-link bg-dark text-white">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+</div>

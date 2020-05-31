@@ -16,6 +16,8 @@
 
         public string Author { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
