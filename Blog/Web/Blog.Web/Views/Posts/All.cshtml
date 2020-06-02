@@ -7,6 +7,21 @@
     this.ViewData["Title"] = "Post All";
 }
 
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('https://miro.medium.com/max/960/1*PaZT9QBa-Dt9K9FE9-CkbA.jpeg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Page: @Model.CurrentPage</h1>
+                    <span class="subheading"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
 <div class="row">
     <div class="container bg-white">
         <div class="row">
@@ -22,17 +37,17 @@
                         <div class="post-meta d-flex justify-content-between">
                             <div class="category">
                                 @*@foreach (var tag in item.tz)
-                                {
-                                    <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag">@tag</a>
-                                }*@
+                                    {
+                                        <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag">@tag</a>
+                                    }*@
                             </div>
                         </div>
-                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">
+                        <a asp-controller="Posts" asp-action="Details" asp-route-postId="@item.Id">
                             <h3 class="h4">@item.Title</h3>
                         </a>
-                        <p class="text-muted">@item.ShortDescription</p>
-                        <footer class="post-footer d-flex align-items-center">
-                            <a class="author d-flex align-items-center flex-wrap">
+                        <p class="text-muted">@item.ShortDescription.Substring(0, 80)</p>
+                        <div class="d-flex align-items-center">
+                            <a class="d-flex align-items-center flex-wrap">
                                 <div class="avatar">
                                     <img src="@item.Author" class="img-fluid">
                                 </div>
@@ -40,11 +55,10 @@
                                     <span class="font-weight-bold text-dark">@item.Author</span>
                                 </div>
                             </a>
-                        </footer>
-                        <form id="likesForm" method="post"></form>
-                        <div class="post-meta d-flex justify-content-between">
-                            <div cclass="meta">
-                                @item.CreatedOn.Date.Day @item.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture) @item.CreatedOn.Date.Year
+                            <div class="ml-4 post-meta d-flex justify-content-between">
+                                <div cclass="meta">
+                                    @item.CreatedOn.Date.Day @item.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture) @item.CreatedOn.Date.Year
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,3 +103,4 @@
         </nav>
     }
 </div>
+<hr />
