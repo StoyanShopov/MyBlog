@@ -1,3 +1,24 @@
+## Back End
+- ASP.NET Core 3.1
+- Entity Framework 3.1
+- MS SQL Server
+- Automapper
+- Repository Pattern and Service Layer
+
+## Front End
+- Bootstrap
+- FontAwesome
+- HTML & CSS
+
+## Cloud for Images
+- [Cloudinary](https://cloudinary.com/)
+
+## Email Sender
+- [SendGrid](https://sendgrid.com/)
+
+## Text Editor
+- [TineMce](https://www.tiny.cloud/)
+
 ## Blog Template
 - [StartBootstrap](https://startbootstrap.com/themes/clean-blog/)
 
