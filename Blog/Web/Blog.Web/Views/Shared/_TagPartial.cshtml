@@ -1,0 +1,11 @@
+﻿@using Blog.Common
+@using Blog.Data.Models
+@using Blog.Services.Data.Contracts
+@using Blog.Web.ViewModels.Tags.ViewModels
+@using Microsoft.AspNetCore.Identity
+@inject ITagsService TagsService
+
+@foreach (var tag in TagsService.GetAllTags<TagViewModel>())
+{
+    <a asp-area="" asp-controller="Tags" asp-action="Details" asp-route-tagId="@tag.Id">#@tag.Name</a>
+}

@@ -25,7 +25,7 @@
         }
 
 
-        public async Task<IActionResult> All(int page = 1, int perPage = 9)
+        public IActionResult All(int page = 1, int perPage = 9)
         {
             var postsCount = this.postsService.TotalPosts;
 
