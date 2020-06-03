@@ -10,7 +10,7 @@
 
     public static class ApplicationCloudinary
     {
-        public static async Task<string> UploadImage(Cloudinary cloudinary, IFormFile image, string name)
+        public static async Task<string> UploadViaFromFile(Cloudinary cloudinary, IFormFile image, string name)
         {
             byte[] destinationImage;
 
@@ -21,20 +21,19 @@
                 destinationImage = memoryStream.ToArray();
             }
 
-            await using var ms = new MemoryStream(destinationImage);
+            var result = await UploadAsync(cloudinary, destinationImage, name);
 
-            // Cloudinary doesn't work with &
-            name = name.Replace("&", "And");
+            return result;
+        }
 
-            var uploadParams = new ImageUploadParams
-            {
-                File = new FileDescription(name, ms),
-                PublicId = name,
-            };
+        public static async Task<string> UploadImageViaLink(Cloudinary cloudinary, string link, string name)
+        {
+            var webClient = new System.Net.WebClient();
+            var bytes = await webClient.DownloadDataTaskAsync(link);
 
-            var uploadResult = await cloudinary.UploadAsync(uploadParams);
+            var result = await UploadAsync(cloudinary, bytes, name);
 
-            return uploadResult.SecureUri.AbsoluteUri;
+            return result;
         }
 
         public static async Task DeleteImage(Cloudinary cloudinary, string name)
@@ -48,6 +47,24 @@
             };
 
             await cloudinary.DeleteDerivedResourcesAsync(delParams);
+        }
+
+        private static async Task<string> UploadAsync(Cloudinary cloudinary, byte[] bytes, string name)
+        {
+            await using var ms = new MemoryStream(bytes);
+
+            // Cloudinary doesn't work with &
+            name = name.Replace("&", "And");
+
+            var uploadParams = new ImageUploadParams
+            {
+                File = new FileDescription(name, ms),
+                PublicId = name,
+            };
+
+            var uploadResult = await cloudinary.UploadAsync(uploadParams);
+
+            return uploadResult.SecureUri.AbsoluteUri;
         }
     }
 }
