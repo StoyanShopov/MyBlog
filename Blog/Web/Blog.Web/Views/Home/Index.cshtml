@@ -32,11 +32,11 @@
                             @post.Title
                         </h2>
                         <div class="mt-1 mb-2">
-                            <img src="@post.ImageUrl" class="index-fit-image" />
+                            <img src="@post.ImageUrl" class="index-fit-image shadow-lg" />
                         </div>
-                        <h3 class="post-subtitle">
+                        <h4 class="post-subtitle">
                             @post.ShortDescription
-                        </h3>
+                        </h4>
                     </a>
                     <p class="post-meta">
                         Posted by
@@ -47,13 +47,9 @@
                 <hr>
             }
             <div>
-                <a asp-area="" asp-controller="Post" asp-action="All" class="btn btn-primary btn-lg btn-block">Older Posts</a>
+                <a asp-area="" asp-controller="Posts" asp-action="All" class="btn btn-primary btn-lg btn-block">Older Posts</a>
             </div>
             <hr />
-            <div class="justify-content-lg-between">
-                <h3>Tags</h3>
-                <partial name="_TagPartial" />
-            </div>
         </div>
     </div>
 </div>

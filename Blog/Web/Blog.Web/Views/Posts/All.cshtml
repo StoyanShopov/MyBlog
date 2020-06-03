@@ -14,8 +14,10 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="site-heading">
-                    <h1>Page: @Model.CurrentPage</h1>
-                    <span class="subheading"></span>
+                    <div class="justify-content-lg-between">
+                        <h3>Tags</h3>
+                        <partial name="_TagPartial" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -27,10 +29,10 @@
         <div class="row">
             @foreach (var item in Model.Posts)
             {
-                <div class="post col-xl-4 mt-3">
-                    <div class="post-thumbnail">
-                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">
-                            <img src="@item.ImageUrl" class="img-fluid">
+                <div class="col-xl-4 mt-3">
+                    <div>
+                        <a asp-controller="Posts" asp-action="Details" asp-route-postId="@item.Id">
+                            <img src="@item.ImageUrl" class="img-post-all">
                         </a>
                     </div>
                     <div class="post-details bg-white">
@@ -45,13 +47,13 @@
                         <a asp-controller="Posts" asp-action="Details" asp-route-postId="@item.Id">
                             <h3 class="h4">@item.Title</h3>
                         </a>
-                        <p class="text-muted">@item.ShortDescription.Substring(0, 80)</p>
+                        <p class="text-justify">@item.ShortDescription.Substring(0, 80)</p>
                         <div class="d-flex align-items-center">
                             <a class="d-flex align-items-center flex-wrap">
-                                <div class="avatar">
+                                <div>
                                     <img src="@item.Author" class="img-fluid">
                                 </div>
-                                <div class="title">
+                                <div>
                                     <span class="font-weight-bold text-dark">@item.Author</span>
                                 </div>
                             </a>

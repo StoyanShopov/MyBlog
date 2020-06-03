@@ -53,6 +53,7 @@
                     {
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                     });
+
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);

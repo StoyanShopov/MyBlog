@@ -7,8 +7,18 @@
     var categories = this.ViewData["AllCategories"] as IEnumerable<SelectListItem>;
 }
 
-<h1 class="text-center">Create post</h1>
-
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Create post</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 <div class="container mt-4">
     <form enctype="multipart/form-data" asp-area="Administration" asp-controller="Posts" asp-action="Create" method="post">
         <div class="form-group">

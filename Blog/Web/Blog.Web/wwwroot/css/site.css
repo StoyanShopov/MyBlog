@@ -60,3 +60,8 @@ body {
     align-content: center;
     overflow: hidden;
 }
+
+.img-post-all {
+    height: 200px;
+    width: 350px;
+}
