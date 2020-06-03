@@ -40,12 +40,28 @@
         public async Task<int> CreateAsync(CreatePostInputModel inputModel)
         {
             var imageUrl = await ApplicationCloudinary
-                .UploadImage(this.cloudinary, inputModel.Image, inputModel.Title);
+                .UploadViaFromFile(this.cloudinary, inputModel.Image, inputModel.Title);
+
+            var images = await AngleSharpExtension
+                .GetImageSourceAsync(inputModel.Description);
+
+            var newUrls = new List<string>();
+
+            foreach (var imgSrc in images)
+            {
+                var url = await ApplicationCloudinary
+                    .UploadImageViaLink(this.cloudinary, imgSrc, Guid.NewGuid().ToString());
+
+                newUrls.Add(url);
+            }
+
+            var updatedContent = await AngleSharpExtension
+                .UpdateImageSourceAsync(newUrls, inputModel.Description);
 
             var post = new Post
             {
                 Title = inputModel.Title,
-                Description = inputModel.Description,
+                Description = updatedContent,
                 ShortDescription = inputModel.ShortDescription,
                 ImageUrl = imageUrl,
             };
