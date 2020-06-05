@@ -37,26 +37,15 @@
         public int TotalPosts
             => this.postRepository.AllAsNoTracking().Count();
 
-        public async Task<int> CreateAsync(CreatePostInputModel inputModel)
+        public async Task<int> CreateAsync(string userId, CreatePostInputModel inputModel)
         {
             var imageUrl = await ApplicationCloudinary
                 .UploadViaFromFile(this.cloudinary, inputModel.Image, inputModel.Title);
 
-            var images = await AngleSharpExtension
-                .GetImageSourceAsync(inputModel.Description);
-
-            var newUrls = new List<string>();
-
-            foreach (var imgSrc in images)
-            {
-                var url = await ApplicationCloudinary
-                    .UploadImageViaLink(this.cloudinary, imgSrc, Guid.NewGuid().ToString());
-
-                newUrls.Add(url);
-            }
+            var newUrls = await this.GetImageUrlsAsync(inputModel.Description);
 
             var updatedContent = await AngleSharpExtension
-                .UpdateImageSourceAsync(newUrls, inputModel.Description);
+                .UpdateImageSourceAsync(newUrls.ToList(), inputModel.Description);
 
             var post = new Post
             {
@@ -64,6 +53,7 @@
                 Description = updatedContent,
                 ShortDescription = inputModel.ShortDescription,
                 ImageUrl = imageUrl,
+                ApplicationUserId = userId,
             };
 
             post.PostCategories.Add(new PostCategory
@@ -91,11 +81,6 @@
             await this.postRepository.SaveChangesAsync();
 
             return post.Id;
-        }
-
-        public int EditAsync()
-        {
-            return 0;
         }
 
         public IEnumerable<TModel> GetAll<TModel>()
@@ -147,6 +132,72 @@
              .ToList();
 
             return result;
+        }
+
+        public async Task<int> EditAsync(EditPostInputModel inputModel)
+        {
+            var post = await this.postRepository.GetByIdWithDeletedAsync(inputModel.Id);
+
+            post.Title = inputModel.Title;
+            post.Description = inputModel.Description;
+            post.ShortDescription = inputModel.ShortDescription;
+
+            if (post.PostCategories.Any(x => x.CategoryId == inputModel.CategoryId))
+            {
+                post.PostCategories.Add(new PostCategory
+                {
+                    CategoryId = inputModel.CategoryId,
+                });
+            }
+
+            if (inputModel.Image != null)
+            {
+                var imageUrl = await ApplicationCloudinary
+                    .UploadViaFromFile(this.cloudinary, inputModel.Image, inputModel.Title);
+
+                post.ImageUrl = imageUrl;
+            }
+
+            var tags = inputModel.Tags
+                .Split(separator: new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Distinct()
+                .ToArray();
+
+            foreach (var tag in tags)
+            {
+                if (post.TagPosts.Any(x => x.Tag.Name == tag))
+                {
+                    post.TagPosts.Add(new TagPost
+                    {
+                        Tag = new Tag
+                        {
+                            Name = tag,
+                        },
+                    });
+                }
+            }
+
+            await this.postRepository.SaveChangesAsync();
+
+            return post.Id;
+        }
+
+        private async Task<IEnumerable<string>> GetImageUrlsAsync(string inputModelDescription)
+        {
+            var images = await AngleSharpExtension
+                .GetImageSourceAsync(inputModelDescription);
+
+            var newUrls = new List<string>();
+
+            foreach (var imgSrc in images)
+            {
+                var url = await ApplicationCloudinary
+                    .UploadImageViaLink(this.cloudinary, imgSrc, Guid.NewGuid().ToString());
+
+                newUrls.Add(url);
+            }
+
+            return newUrls;
         }
     }
 }

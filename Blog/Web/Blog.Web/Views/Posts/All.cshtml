@@ -29,25 +29,17 @@
         <div class="row">
             @foreach (var item in Model.Posts)
             {
-                <div class="col-xl-4 mt-3">
+                <div class="col-xl-4 mt-3 shadow">
                     <div>
                         <a asp-controller="Posts" asp-action="Details" asp-route-postId="@item.Id">
-                            <img src="@item.ImageUrl" class="img-post-all">
+                            <img src="@item.ImageUrl" class="img-post-all mt-3">
                         </a>
                     </div>
-                    <div class="post-details bg-white">
-                        <div class="post-meta d-flex justify-content-between">
-                            <div class="category">
-                                @*@foreach (var tag in item.tz)
-                                    {
-                                        <a asp-controller="Tags" asp-action="Details" asp-route-id="@tag">@tag</a>
-                                    }*@
-                            </div>
-                        </div>
+                    <div class="bg-white">
                         <a asp-controller="Posts" asp-action="Details" asp-route-postId="@item.Id">
                             <h3 class="h4">@item.Title</h3>
                         </a>
-                        <p class="text-justify">@item.ShortDescription.Substring(0, 80)</p>
+                        <div class="text-break">@item.ShortDescription.Substring(0, 50)</div>
                         <div class="d-flex align-items-center">
                             <a class="d-flex align-items-center flex-wrap">
                                 <div>
@@ -57,7 +49,7 @@
                                     <span class="font-weight-bold text-dark">@item.Author</span>
                                 </div>
                             </a>
-                            <div class="ml-4 post-meta d-flex justify-content-between">
+                            <div class="ml-4 mb-3 post-meta d-flex justify-content-between">
                                 <div cclass="meta">
                                     @item.CreatedOn.Date.Day @item.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture) @item.CreatedOn.Date.Year
                                 </div>
@@ -73,9 +65,9 @@
     @if (Model.PagesCount > 0)
     {
         <nav aria-label="Page navigation example">
-            <ul class="pagination pagination-template d-flex justify-content-center">
+            <ul class="pagination d-flex justify-content-center">
                 <li class="page-item">
-                    <a href="/Posts/All/?page=@Model.PreviousPage" class="page-link bg-dark text-white">
+                    <a asp-area="" asp-controller="Posts" asp-action="All" asp-route-page="@Model.PreviousPage" class="page-link bg-dark text-white">
                         <i class="fa fa-angle-left">
                         </i>
                     </a>
@@ -86,18 +78,18 @@
                     if (i == Model.CurrentPage)
                     {
                         <li class="page-item">
-                            <a href="/Posts/All/?page=@i" class="page-link bg-dark text-white active">@i</a>
+                            <a asp-area="" asp-controller="Posts" asp-action="All" asp-route-page="@i" class="page-link bg-dark text-white active">@i</a>
                         </li>
                     }
                     else
                     {
                         <li class="page-item">
-                            <a href="/Posts/All/?page=@i" class="page-link active bg-dark text-white">@i</a>
+                            <a asp-area="" asp-controller="Posts" asp-action="All" asp-route-page="@i" class="page-link active bg-dark text-white">@i</a>
                         </li>
                     }
                 }
                 <li class="page-item">
-                    <a href="/Posts/All/?page=@Model.NextPage" class="page-link bg-dark text-white">
+                    <a asp-area="" asp-controller="Posts" asp-action="All" asp-route-page="@Model.NextPage" class="page-link bg-dark text-white">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </li>

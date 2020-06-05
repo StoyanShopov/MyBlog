@@ -33,7 +33,7 @@
                 .GetByPage<IndexPostViewModel>(page, perPage)
                 .ToList();
 
-            var pagesCount = (int) Math.Ceiling(postsCount / (decimal)perPage);
+            var pagesCount = (int)Math.Ceiling(postsCount / (decimal)perPage);
 
             var model = new AllPostViewModel
             {

@@ -11,9 +11,7 @@
     {
         public int TotalPosts { get; }
 
-        Task<int> CreateAsync(CreatePostInputModel inputModel);
-
-        //public Task<int> EditAsync();
+        Task<int> CreateAsync(string userId, CreatePostInputModel inputModel);
 
         Task RemoveAsync(int id);
 
@@ -24,5 +22,7 @@
         IEnumerable<TModel> GetLastCreatedPosts<TModel>(int defaultCount = 3);
 
         IEnumerable<TModel> GetByPage<TModel>(int take, int skip);
+
+        Task<int> EditAsync(EditPostInputModel inputModel);
     }
 }

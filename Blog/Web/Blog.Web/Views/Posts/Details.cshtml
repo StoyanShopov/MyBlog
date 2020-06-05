@@ -39,4 +39,11 @@
     </div>
 </article>
 
+<div class="text-center">
+    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+    {
+        <a asp-area="Administration" asp-controller="Posts" asp-action="Edit" asp-route-postId="@Model.Id" class="btn btn-primary btn-lg">Edit</a>
+    }
+</div>
+
 <hr>

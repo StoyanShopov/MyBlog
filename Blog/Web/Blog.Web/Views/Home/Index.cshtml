@@ -31,12 +31,18 @@
                         <h2 class="post-title">
                             @post.Title
                         </h2>
-                        <div class="mt-1 mb-2">
-                            <img src="@post.ImageUrl" class="index-fit-image shadow-lg" />
+                        <div class="row text-break">
+                            <div class="col-6">
+                                <div class="mt-1 mb-2">
+                                    <img src="@post.ImageUrl" class="index-fit-image shadow-lg" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <h4 class="post-subtitle">
+                                    @post.ShortDescription
+                                </h4>
+                            </div>
                         </div>
-                        <h4 class="post-subtitle">
-                            @post.ShortDescription
-                        </h4>
                     </a>
                     <p class="post-meta">
                         Posted by
