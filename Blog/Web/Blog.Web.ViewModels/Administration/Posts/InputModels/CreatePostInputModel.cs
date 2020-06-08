@@ -27,7 +27,7 @@
 
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = ValidationConstants.NullOrEmptyField)]
-        [StringLength(100, MinimumLength = 50, ErrorMessage = ShortDescriptionErrorMessage)]
+        [StringLength(200, MinimumLength = 50, ErrorMessage = ShortDescriptionErrorMessage)]
         [Display(Name = "Short Description")]
         public string ShortDescription { get; set; }
 

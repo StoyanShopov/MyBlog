@@ -49,7 +49,9 @@ namespace Blog.Data.Migrations
                     Biography = table.Column<string>(nullable: true),
                     ProfilePicture = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
+#pragma warning disable SA1413 // Use trailing comma in multi-line initializers
                     DeletedOn = table.Column<DateTime>(nullable: true)
+#pragma warning restore SA1413 // Use trailing comma in multi-line initializers
                 },
                 constraints: table =>
                 {

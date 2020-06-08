@@ -31,19 +31,22 @@
                         <h2 class="post-title">
                             @post.Title
                         </h2>
-                        <div class="row text-break">
-                            <div class="col-6">
-                                <div class="mt-1 mb-2">
+                    </a>
+                    <div class="row text-break">
+                        <div class="col-6">
+                            <div class="mt-1 mb-2">
+                                <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-postId="@post.Id">
                                     <img src="@post.ImageUrl" class="index-fit-image shadow-lg" />
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <h4 class="post-subtitle">
-                                    @post.ShortDescription
-                                </h4>
+                                </a>
                             </div>
                         </div>
-                    </a>
+                        <div class="col-6">
+                            <p class="">
+                                @post.ShortDescription
+                            </p>
+                        </div>
+                    </div>
+
                     <p class="post-meta">
                         Posted by
                         <a href="#">@post.Author</a>

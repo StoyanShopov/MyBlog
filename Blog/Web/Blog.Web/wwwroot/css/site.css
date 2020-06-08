@@ -55,9 +55,8 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 .index-fit-image {
-    max-height: 100%;
-    max-width: 100%;
-    align-content: center;
+    max-height: 70%;
+    max-width: 70%;
     overflow: hidden;
 }
 

@@ -9,5 +9,7 @@
         public const string AdministratorUserName = "Administrator";
 
         public const string AdministratorPassword = "Administrator";
+
+        public const string AdministratorEmail = "admin@admin.bg";
     }
 }

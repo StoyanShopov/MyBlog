@@ -23,10 +23,18 @@
 
         public string ImageUrl { get; set; }
 
-        public string SanitizedContent
-            => new HtmlSanitizer().Sanitize(this.Description);
-
         public IEnumerable<string> Tags { get; set; }
+
+        public string SanitizedContent()
+        {
+            var sanitizer = new HtmlSanitizer();
+
+            sanitizer.AllowedTags.Add("iframe");
+            sanitizer.AllowedTags.Add("src");
+            sanitizer.AllowedTags.Add("allowfullscreen");
+
+            return sanitizer.Sanitize(this.Description);
+        }
 
         public void CreateMappings(IProfileExpression configuration)
         {

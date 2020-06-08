@@ -58,12 +58,15 @@
     </form>
 </div>
 
-<script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    tinymce.init({
-        selector: "#Description",
-        plugins: [
-            "image paste table link code media"
-        ]
-    });
-</script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: "#Description",
+            plugins: [
+                "image paste table link code media"
+            ]
+        });
+    </script>
+}
