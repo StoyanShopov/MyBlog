@@ -22,5 +22,12 @@
                 .AllAsNoTracking()
                 .To<T>()
                 .ToList();
+
+        public IEnumerable<T> GetAllTagsById<T>(int id)
+            => this.tagRepository
+                .AllAsNoTracking()
+                .Where(i => i.Id == id)
+                .To<T>()
+                .ToList();
     }
 }

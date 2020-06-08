@@ -83,9 +83,10 @@
             return post.Id;
         }
 
-        public IEnumerable<TModel> GetAll<TModel>()
+        public IEnumerable<TModel> GetAllByTag<TModel>(int id)
             => this.postRepository
             .AllAsNoTracking()
+            .Where(t => t.TagPosts.Any(i => i.TagId == id))
             .OrderByDescending(x => x.CreatedOn)
             .To<TModel>()
             .ToList();

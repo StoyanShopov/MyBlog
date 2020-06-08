@@ -38,4 +38,8 @@
     <ProjectReference Include="..\Blog.Web.Infrastructure\Blog.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Blog.Web.ViewModels\Blog.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Tags\" />
+  </ItemGroup>
 </Project>

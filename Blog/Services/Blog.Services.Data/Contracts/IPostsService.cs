@@ -15,7 +15,7 @@
 
         Task RemoveAsync(int id);
 
-        IEnumerable<TModel> GetAll<TModel>();
+        IEnumerable<TModel> GetAllByTag<TModel>(int tagId);
 
         TModel GetById<TModel>(int id);
 
