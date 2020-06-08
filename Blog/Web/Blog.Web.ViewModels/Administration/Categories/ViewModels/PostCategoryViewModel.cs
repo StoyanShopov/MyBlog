@@ -1,7 +1,7 @@
-﻿namespace Blog.Web.ViewModels.Administration.Categories
+﻿namespace Blog.Web.ViewModels.Administration.Categories.ViewModels
 {
-    using Blog.Data.Models;
-    using Blog.Services.Mapping;
+    using Data.Models;
+    using Services.Mapping;
 
     public class PostCategoryViewModel : IMapFrom<Category>
     {

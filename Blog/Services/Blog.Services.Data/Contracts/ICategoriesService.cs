@@ -5,7 +5,7 @@
 
     public interface ICategoriesService
     {
-        Task AddAsync(string name);
+        Task CreateAsync(string name);
 
         IEnumerable<TModel> GetAll<TModel>();
     }

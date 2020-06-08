@@ -9,15 +9,11 @@
 
 <!-- Page Header -->
 <header class="masthead" style="background-image: url('https://miro.medium.com/max/960/1*PaZT9QBa-Dt9K9FE9-CkbA.jpeg')">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <div class="justify-content-lg-between">
-                        <h3>Tags</h3>
-                        <partial name="_TagPartial" />
-                    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+                <div class="justify-content-lg-between">
+    
                 </div>
             </div>
         </div>
@@ -29,7 +25,7 @@
         <div class="row">
             @foreach (var item in Model.Posts)
             {
-                <div class="col-xl-4 mt-3 shadow">
+                <div class="col-xl-4 mt-3 shadow rounded-lg">
                     <div>
                         <a asp-controller="Posts" asp-action="Details" asp-route-postId="@item.Id">
                             <img src="@item.ImageUrl" class="img-post-all mt-3">
@@ -49,7 +45,7 @@
                                     <span class="font-weight-bold text-dark">@item.Author</span>
                                 </div>
                             </a>
-                            <div class="ml-4 mb-3 post-meta d-flex justify-content-between">
+                            <div class="d-flex align-items-center flex-wrap ml-4">
                                 <div cclass="meta">
                                     @item.CreatedOn.Date.Day @item.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture) @item.CreatedOn.Date.Year
                                 </div>
@@ -96,5 +92,17 @@
             </ul>
         </nav>
     }
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+                <div class="justify-content-lg-between">
+                    <h3 class="text-center">Tags</h3>
+                    <partial name="_TagPartial" />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <hr />

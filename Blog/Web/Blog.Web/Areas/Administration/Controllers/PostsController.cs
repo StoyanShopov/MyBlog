@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Area("Administration")]
-    public class PostsController : Controller
+    public class PostsController : AdministrationController
     {
         private readonly ICategoriesService categoriesService;
         private readonly IPostsService postsService;
@@ -47,8 +47,7 @@
             }
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var applicationUser = await this.userManager.GetUserAsync(this.User);
-
+            
             var postId = await this.postsService
                 .CreateAsync(userId, inputModel);
 

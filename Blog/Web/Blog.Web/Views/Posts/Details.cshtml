@@ -25,6 +25,7 @@
         </div>
     </div>
 </header>
+<h1></h1>
 
 <!-- Post Content -->
 <article>
@@ -38,6 +39,15 @@
         </div>
     </div>
 </article>
+
+<a href="https://www.facebook.com/sharer/sharer.php?u=stoyanshopoff.com/posts/details?postId=@Model.Id" target="_blank">
+    Share on Facebook
+</a>
+<a href="https://www.linkedin.com/sharing/share-offsite/?url=stoyanshopoff.com/posts/details?postId=@Model.Id">
+    Share on LinkedIn
+</a>
+
+<h1>Posted by @Model.Tags</h1>
 
 <div class="text-center">
     @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))

@@ -19,7 +19,7 @@
             this.categoryRepository = categoryRepository;
         }
 
-        public async Task AddAsync(string name)
+        public async Task CreateAsync(string name)
         {
             var categoryExists = await this.categoryRepository
                 .AllAsNoTracking()

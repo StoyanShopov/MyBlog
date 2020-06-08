@@ -24,6 +24,8 @@
 
         public string ImageUrl { get; set; }
 
+        public int Views { get; set; }
+
         public ApplicationUser ApplicationUser { get; set; }
 
         public ICollection<PostLike> PostLikes { get; set; }
