@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Blog.Services.Data.Contracts
+﻿namespace Blog.Services.Data.Contracts
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public interface IEmailServices
     {
     }

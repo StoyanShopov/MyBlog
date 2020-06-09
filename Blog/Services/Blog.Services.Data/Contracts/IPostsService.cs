@@ -15,13 +15,13 @@
 
         Task RemoveAsync(int id);
 
-        IEnumerable<TModel> GetAllByTag<TModel>(int tagId);
-
         TModel GetById<TModel>(int id);
 
         IEnumerable<TModel> GetLastCreatedPosts<TModel>(int defaultCount = 3);
 
         IEnumerable<TModel> GetByPage<TModel>(int take, int skip);
+
+        IEnumerable<TModel> GetByTagPage<TModel>(int tag, int take, int skip);
 
         Task<int> EditAsync(EditPostInputModel inputModel);
     }

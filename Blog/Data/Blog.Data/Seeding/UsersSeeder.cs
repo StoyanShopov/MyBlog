@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Blog.Data.Seeding
+﻿namespace Blog.Data.Seeding
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
+
     using Blog.Common;
+    using Blog.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
-    using Models;
 
     internal class UsersSeeder : ISeeder
     {
@@ -38,11 +38,11 @@ namespace Blog.Data.Seeding
             {
                 var result = await userManager.CreateAsync(
                     new ApplicationUser
-                {
-                    UserName = username,
-                    Email = email,
-                    EmailConfirmed = true,
-                }, password);
+                    {
+                        UserName = username,
+                        Email = email,
+                        EmailConfirmed = true,
+                    }, password);
 
                 if (!result.Succeeded)
                 {

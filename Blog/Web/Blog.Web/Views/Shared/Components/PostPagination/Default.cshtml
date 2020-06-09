@@ -1,0 +1,38 @@
+﻿@model Blog.Web.ViewModels.Posts.ViewModels.AllPostViewModel
+
+<div class="mt-4">
+    @if (Model.PagesCount > 0)
+    {
+        <nav aria-label="Page navigation example">
+            <ul class="pagination d-flex justify-content-center">
+                <li class="page-item">
+                    <a asp-area="" asp-controller="Posts" asp-action="All" asp-route-page="@Model.PreviousPage" class="page-link bg-dark text-white">
+                        <i class="fa fa-angle-left">
+                        </i>
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= Model.PagesCount; i++)
+                {
+                    if (i == Model.CurrentPage)
+                    {
+                        <li class="page-item">
+                            <a asp-area="" asp-controller="Posts" asp-action="All" asp-route-page="@i" class="page-link bg-dark text-white active">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a asp-area="" asp-controller="Posts" asp-action="All" asp-route-page="@i" class="page-link active bg-dark text-white">@i</a>
+                        </li>
+                    }
+                }
+                <li class="page-item">
+                    <a asp-area="" asp-controller="Posts" asp-action="All" asp-route-page="@Model.NextPage" class="page-link bg-dark text-white">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+</div>

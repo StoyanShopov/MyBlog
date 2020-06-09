@@ -64,7 +64,7 @@
 
             var uploadResult = await cloudinary.UploadAsync(uploadParams);
 
-            return uploadResult.SecureUri.AbsoluteUri;
+            return uploadResult?.SecureUri.AbsoluteUri;
         }
     }
 }

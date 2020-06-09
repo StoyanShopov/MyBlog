@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Blog.Web.Areas.Administration.Controllers
+﻿namespace Blog.Web.Areas.Administration.Controllers
 {
-    using System.Security.Claims;
-    using Common;
-    using Data.Models;
-    using Microsoft.AspNetCore.Identity;
+    using System.Threading.Tasks;
+
+    using Blog.Services.Data.Contracts;
+    using Blog.Web.ViewModels.Administration.Categories.InputModels;
     using Microsoft.AspNetCore.Mvc;
-    using Services.Data.Contracts;
-    using ViewModels.Administration.Categories.InputModels;
-    using ViewModels.Administration.Posts.InputModels;
 
     public class CategoriesController : AdministrationController
     {

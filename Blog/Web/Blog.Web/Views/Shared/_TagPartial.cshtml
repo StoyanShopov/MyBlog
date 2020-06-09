@@ -5,7 +5,19 @@
 @using Microsoft.AspNetCore.Identity
 @inject ITagsService TagsService
 
-@foreach (var tag in TagsService.GetAllTags<TagViewModel>())
-{
-    <a asp-area="" asp-controller="Tags" asp-action="Details" asp-route-tagId="@tag.Id" class="text-dark">#@tag.Name</a>
-}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+                <div class="justify-content-lg-between">
+                    <h3 class="text-center">Tags</h3>
+                    @foreach (var tag in TagsService.GetAllTags<TagViewModel>())
+                    {
+                        <a asp-area="" asp-controller="Posts" asp-action="AllByTag" asp-route-tagId="@tag.Id" class="text-dark">#@tag.Name</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,10 +3,10 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Blog.Data.Models;
     using Blog.Services.Data.Contracts;
     using Blog.Web.Common;
     using Blog.Web.ViewModels.Administration.Posts.InputModels;
-    using Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -46,12 +46,13 @@
                 return this.View(inputModel);
             }
 
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            
+            var userId = this.User
+                .FindFirstValue(ClaimTypes.NameIdentifier);
+
             var postId = await this.postsService
                 .CreateAsync(userId, inputModel);
 
-            return this.RedirectToAction("Details", "Posts", new { postId });
+            return this.RedirectToAction("Details", "Posts", new { postId, area = string.Empty });
         }
 
         public IActionResult Edit(int postId)

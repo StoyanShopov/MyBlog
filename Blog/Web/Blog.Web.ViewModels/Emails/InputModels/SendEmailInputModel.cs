@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Blog.Web.ViewModels.Emails.InputModels
+﻿namespace Blog.Web.ViewModels.Emails.InputModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class SendEmailInputModel
     {
         public string Name { get; set; }

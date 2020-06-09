@@ -66,15 +66,27 @@
                 .Distinct()
                 .ToArray();
 
-            foreach (var tag in tags)
+            foreach (var tagName in tags)
             {
-                post.TagPosts.Add(new TagPost
+                var currentTag = this.tagRepository
+                    .AllAsNoTracking()
+                    .FirstOrDefault(x => x.Name == tagName);
+
+                if (currentTag == null)
                 {
-                    Tag = new Tag
+                    currentTag = new Tag
                     {
-                        Name = tag,
-                    },
-                });
+                        Name = tagName,
+                    };
+                }
+
+                if (post.TagPosts.All(x => x.Tag.Name != tagName))
+                {
+                    post.TagPosts.Add(new TagPost
+                    {
+                        TagId = currentTag.Id,
+                    });
+                }
             }
 
             await this.postRepository.AddAsync(post);
@@ -82,14 +94,6 @@
 
             return post.Id;
         }
-
-        public IEnumerable<TModel> GetAllByTag<TModel>(int id)
-            => this.postRepository
-            .AllAsNoTracking()
-            .Where(t => t.TagPosts.Any(i => i.TagId == id))
-            .OrderByDescending(x => x.CreatedOn)
-            .To<TModel>()
-            .ToList();
 
         public TModel GetById<TModel>(int id)
             => this.postRepository
@@ -135,6 +139,23 @@
             return result;
         }
 
+        public IEnumerable<TModel> GetByTagPage<TModel>(int tagId, int take, int skip)
+        {
+            var result = this.postRepository
+                .AllAsNoTracking()
+                .Include(x => x.ApplicationUser)
+                .Include(x => x.TagPosts)
+                .ThenInclude(t => t.Tag)
+                .Where(t => t.TagPosts.Any(i => i.TagId == tagId))
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(skip * (take - 1))
+                .Take(skip)
+                .To<TModel>()
+                .ToList();
+
+            return result;
+        }
+
         public async Task<int> EditAsync(EditPostInputModel inputModel)
         {
             var post = await this.postRepository.GetByIdWithDeletedAsync(inputModel.Id);
@@ -164,16 +185,25 @@
                 .Distinct()
                 .ToArray();
 
-            foreach (var tag in tags)
+            foreach (var tagName in tags)
             {
-                if (post.TagPosts.Any(x => x.Tag.Name == tag))
+                var currentTag = this.tagRepository
+                    .AllAsNoTracking()
+                    .FirstOrDefault(x => x.Name == tagName);
+
+                if (currentTag == null)
+                {
+                    currentTag = new Tag
+                    {
+                        Name = tagName,
+                    };
+                }
+
+                if (post.TagPosts.All(x => x.Tag.Name != tagName))
                 {
                     post.TagPosts.Add(new TagPost
                     {
-                        Tag = new Tag
-                        {
-                            Name = tag,
-                        },
+                        TagId = currentTag.Id,
                     });
                 }
             }

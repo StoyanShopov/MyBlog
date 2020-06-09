@@ -3,31 +3,21 @@
 @model DetailPostViewModel;
 
 @using Blog.Common
+@using Blog.Web.ViewModels.Common
 @{
     this.ViewData["Title"] = "Post Details";
 }
 
+@await Component.InvokeAsync("Header", new HeaderViewModel
+{
+    Title = Model.Title,
+    Content = $"{Model.CreatedOn.Date.Day} {Model.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture)} {Model.CreatedOn.Date.Year})",
+    ImageUrl = Model.ImageUrl,
+})
+<vc:header></vc:header>
 
-<header class="masthead" style="background-image: url('@Model.ImageUrl')">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="post-heading">
-                    <h1>@Model.Title</h1>
-                    <span class="meta">
-                        Posted by
-                        <a href="#">@Model.Author</a>
-                        on  @Model.CreatedOn.Date.Day @Model.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture) @Model.CreatedOn.Date.Year
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
 <h1></h1>
 
-<!-- Post Content -->
 <article>
     <div class="container">
         <div class="row">
@@ -51,7 +41,7 @@
 </div>
 
 @*<h1 class="text-center">Tags</h1>
-<h3 class="text-center">@string.Join(", ", Model.Tags)</h3>*@
+    <h3 class="text-center">@string.Join(", ", Model.Tags)</h3>*@
 
 <div class="text-center">
     @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))

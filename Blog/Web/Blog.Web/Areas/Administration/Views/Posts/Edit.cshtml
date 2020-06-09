@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using Blog.Web.ViewModels.Administration.Posts.InputModels;
+@using Blog.Web.ViewModels.Common
 @model EditPostInputModel
 
 @{
@@ -8,23 +9,13 @@
     var categories = this.ViewData["AllCategories"] as IEnumerable<SelectListItem>;
 }
 
-<header class="masthead" style="background-image: url('@Model.ImageUrl')">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="post-heading">
-                    <h1>@Model.Title</h1>
-                    <span class="meta">
-                        Posted by
-                        <a href="#">@Model.Author</a>
-                        on  @Model.CreatedOn.Date.Day @Model.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture) @Model.CreatedOn.Date.Year
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+@await Component.InvokeAsync("Header", new HeaderViewModel
+{
+    Title = Model.Title,
+    Content = $"{Model.CreatedOn.Date.Day} {Model.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture)} {Model.CreatedOn.Date.Year})",
+    ImageUrl = Model.ImageUrl,
+})
+<vc:header></vc:header>
 
 <div class="container mt-4">
     <form enctype="multipart/form-data" asp-area="Administration" asp-controller="Posts" asp-action="Edit" method="post">

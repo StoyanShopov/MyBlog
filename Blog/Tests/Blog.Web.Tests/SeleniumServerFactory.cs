@@ -23,14 +23,14 @@
             this.CreateServer(this.CreateWebHostBuilder());
 
             this.process = new Process
-                       {
-                           StartInfo = new ProcessStartInfo
-                                       {
-                                           FileName = "selenium-standalone",
-                                           Arguments = "start",
-                                           UseShellExecute = true,
-                                       },
-                       };
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "selenium-standalone",
+                    Arguments = "start",
+                    UseShellExecute = true,
+                },
+            };
             this.process.Start();
         }
 

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Blog.Web.ViewModels.Posts.ViewModels
+﻿namespace Blog.Web.ViewModels.Posts.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class AllPostViewModel
     {
         public List<IndexPostViewModel> Posts { get; set; }

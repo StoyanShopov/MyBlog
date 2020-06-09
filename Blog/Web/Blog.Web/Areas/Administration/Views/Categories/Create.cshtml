@@ -1,27 +1,26 @@
-﻿@using Blog.Web.ViewModels.Administration.Categories.InputModels;
+﻿@using System.Globalization
+@using Blog.Web.ViewModels.Administration.Categories.InputModels;
+@using Blog.Web.ViewModels.Common
 @model AddCategoryInputModel
 
 @{
     this.ViewData["Title"] = "Create Category";
 }
 
-<header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h1>Create category</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+
+@await Component.InvokeAsync("Header", new HeaderViewModel
+{
+    Title = "Create Category",
+    Content = "",
+    ImageUrl = "https://res.cloudinary.com/dmvrh3bvc/image/upload/v1591631420/bg_bluegradient_lpytvz.jpg",
+})
+<vc:header></vc:header>
+
 <div class="container mt-4">
     <form enctype="multipart/form-data" asp-area="Administration" asp-controller="Categories" asp-action="Create" method="post">
         <div class="form-group">
             <label asp-for="@Model.Name"></label>
-            <input class="form-control" asp-for="@Model.Name">
+            <input asp-for="@Model.Name" class="form-control" >
             <span asp-validation-for="@Model.Name" class="text-danger"></span>
         </div>
         <br />

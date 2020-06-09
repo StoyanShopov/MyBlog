@@ -6,8 +6,8 @@
 
     using Blog.Services.Data.Contracts;
     using Blog.Web.ViewModels.Administration.Categories;
+    using Blog.Web.ViewModels.Administration.Categories.ViewModels;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using ViewModels.Administration.Categories.ViewModels;
 
     public class SelectListGenerator
     {
@@ -17,7 +17,7 @@
             var categories = categoriesService
                 .GetAll<PostCategoryViewModel>();
 
-            var postCategoryViewModels = categories 
+            var postCategoryViewModels = categories
                 as PostCategoryViewModel[] ?? categories.ToArray();
 
             // var groups = new List<SelectListGroup>();

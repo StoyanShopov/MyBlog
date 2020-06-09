@@ -1,4 +1,5 @@
 ﻿@using Blog.Web.ViewModels.Administration.Posts.InputModels;
+@using Blog.Web.ViewModels.Common
 @model CreatePostInputModel
 
 @{
@@ -7,18 +8,14 @@
     var categories = this.ViewData["AllCategories"] as IEnumerable<SelectListItem>;
 }
 
-<header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h1>Create post</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+@await Component.InvokeAsync("Header", new HeaderViewModel
+{
+    Title = "Create Post",
+    Content = "",
+    ImageUrl = "https://res.cloudinary.com/dmvrh3bvc/image/upload/v1591631420/bg_bluegradient_lpytvz.jpg",
+})
+<vc:header></vc:header>
+
 <div class="container mt-4">
     <form enctype="multipart/form-data" asp-area="Administration" asp-controller="Posts" asp-action="Create" method="post">
         <div class="form-group">

@@ -5,18 +5,18 @@
 
     using Blog.Services.Messaging;
     using Blog.Web.ViewModels.Emails.InputModels;
+    using Blog.Web.ViewModels.Emails.ViewModels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
-    using ViewModels.Emails.ViewModels;
 
     [ApiController]
     [Route("api/[controller]")]
-    public class LikesController : ControllerBase
+    public class EmailsController : ControllerBase
     {
         private readonly IEmailSender sendGridEmailSender;
 
-        public LikesController(IEmailSender sendGridEmailSender)
+        public EmailsController(IEmailSender sendGridEmailSender)
         {
             this.sendGridEmailSender = sendGridEmailSender;
         }

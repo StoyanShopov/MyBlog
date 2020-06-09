@@ -1,24 +1,19 @@
 ﻿@using System.Globalization
+@using Blog.Web.ViewModels.Common
 @using Blog.Web.ViewModels.Posts.ViewModels;
 @model IEnumerable<IndexPostViewModel>;
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
-<!-- Page Header -->
-<header class="masthead" style="background-image: url('https://miro.medium.com/max/960/1*PaZT9QBa-Dt9K9FE9-CkbA.jpeg')">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h1>Stoyan Shopoff Blog</h1>
-                    <span class="subheading">A Blog For My Stories</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+
+@await Component.InvokeAsync("Header", new HeaderViewModel
+{
+    Title = "Stoyan Shopoff Blog",
+    Content = "A Blog For My Stories",
+    ImageUrl = "https://miro.medium.com/max/960/1*PaZT9QBa-Dt9K9FE9-CkbA.jpeg",
+})
+<vc:header ></vc:header>
 
 <!-- Main Content -->
 <div class="container">
