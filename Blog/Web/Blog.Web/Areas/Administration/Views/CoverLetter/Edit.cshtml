@@ -1,0 +1,53 @@
+﻿@using Blog.Web.ViewModels.Common
+@model Blog.Web.ViewModels.Administration.CoverLetter.InputModels.EditCoverLetterInputModel
+
+@{
+    this.ViewData["Title"] = "Add Job";
+
+    var categories = this.ViewData["AllCategories"] as IEnumerable<SelectListItem>;
+}
+
+@await Component.InvokeAsync("Header", new HeaderViewModel
+{
+    Title = "Add Job",
+    Content = "",
+    ImageUrl = "https://res.cloudinary.com/dmvrh3bvc/image/upload/v1591631420/bg_bluegradient_lpytvz.jpg",
+})
+<vc:header></vc:header>
+
+<div class="container mt-4">
+    <form enctype="multipart/form-data" asp-area="Administration" asp-controller="CoverLetter" asp-action="Add" method="post">
+        <div class="form-group">
+            <label asp-for="@Model.Title"></label>
+            <input hidden asp-for="@Model.Id"></input>
+            <input class="form-control" asp-for="@Model.Title">
+            <span asp-validation-for="@Model.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Content"></label>
+            <textarea asp-for="@Model.Content" class="form-control" rows="30"></textarea>
+            <span asp-validation-for="@Model.Content" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.StartDate"></label>
+            <input asp-for="@Model.StartDate" class="form-control"/>
+            <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.EndDate"></label>
+            <input asp-for="@Model.EndDate" class="form-control"/>
+            <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.ImageUrl"></label>
+            <input asp-for="@Model.ImageUrl" class="form-control" />
+            <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Add</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

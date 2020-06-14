@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using Blog.Services.Data.Contracts;
     using Blog.Web.ViewModels.Posts.ViewModels;
@@ -25,7 +24,7 @@
             return this.View(post);
         }
 
-        public IActionResult All(int page = 1, int perPage = 1)
+        public IActionResult All(int page = 1, int perPage = 9)
         {
             var postsCount = this.postsService.TotalPosts;
 

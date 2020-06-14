@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using Blog.Data.Common.Repositories;
@@ -124,8 +123,7 @@
         }
 
         public IEnumerable<TModel> GetByPage<TModel>(int take, int skip)
-        {
-            var result = this.postRepository
+            => this.postRepository
              .AllAsNoTracking()
              .Include(x => x.ApplicationUser)
              .Include(x => x.TagPosts)
@@ -136,12 +134,8 @@
              .To<TModel>()
              .ToList();
 
-            return result;
-        }
-
         public IEnumerable<TModel> GetByTagPage<TModel>(int tagId, int take, int skip)
-        {
-            var result = this.postRepository
+            => this.postRepository
                 .AllAsNoTracking()
                 .Include(x => x.ApplicationUser)
                 .Include(x => x.TagPosts)
@@ -152,9 +146,6 @@
                 .Take(skip)
                 .To<TModel>()
                 .ToList();
-
-            return result;
-        }
 
         public async Task<int> EditAsync(EditPostInputModel inputModel)
         {

@@ -1,8 +1,6 @@
 ﻿namespace Blog.Data.Models
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
 
     using Blog.Data.Common.Models;
 

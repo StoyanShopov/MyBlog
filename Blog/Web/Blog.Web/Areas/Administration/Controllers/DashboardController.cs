@@ -1,6 +1,5 @@
 ﻿namespace Blog.Web.Areas.Administration.Controllers
 {
-    using Blog.Services.Data;
     using Blog.Services.Data.Contracts;
     using Blog.Web.ViewModels.Administration.Dashboard;
     using Microsoft.AspNetCore.Mvc;

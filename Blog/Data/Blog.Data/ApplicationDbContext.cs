@@ -37,6 +37,8 @@
 
         public DbSet<Email> Emails { get; set; }
 
+        public DbSet<CoverLetter> CoverLetter { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);

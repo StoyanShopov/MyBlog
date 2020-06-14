@@ -1,8 +1,6 @@
 ﻿namespace Blog.Web.ViewModels.Posts.ViewModels
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
 
     public class AllPostViewModel
     {

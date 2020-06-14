@@ -1,8 +1,6 @@
 ﻿namespace Blog.Services.Data.Contracts
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
 
     using Blog.Web.ViewModels.Administration.Posts.InputModels;

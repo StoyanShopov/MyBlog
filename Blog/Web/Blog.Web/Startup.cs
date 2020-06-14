@@ -68,6 +68,7 @@
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IPostsService, PostsService>();
             services.AddTransient<ITagsService, TagsService>();
+            services.AddTransient<ICoverLetterService, CoverLetterService>();
 
             // SendGrid Setup
             services.AddTransient<IEmailSender, SendGridEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:APIKey"]));

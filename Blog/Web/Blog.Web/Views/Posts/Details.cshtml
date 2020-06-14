@@ -11,7 +11,7 @@
 @await Component.InvokeAsync("Header", new HeaderViewModel
 {
     Title = Model.Title,
-    Content = $"{Model.CreatedOn.Date.Day} {Model.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture)} {Model.CreatedOn.Date.Year})",
+    Content = $"{Model.CreatedOn.Date.Day} {Model.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture)} {Model.CreatedOn.Date.Year}",
     ImageUrl = Model.ImageUrl,
 })
 <vc:header></vc:header>

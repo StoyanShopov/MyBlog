@@ -1,19 +1,22 @@
 ﻿namespace Blog.Web.Controllers
 {
     using System.Diagnostics;
-
+    using System.Linq;
     using Blog.Services.Data.Contracts;
     using Blog.Web.ViewModels;
     using Blog.Web.ViewModels.Posts.ViewModels;
     using Microsoft.AspNetCore.Mvc;
+    using ViewModels.Administration.CoverLetter.ViewModels;
 
     public class HomeController : BaseController
     {
         private readonly IPostsService postsService;
+        private readonly ICoverLetterService coverLetterService;
 
-        public HomeController(IPostsService postsService)
+        public HomeController(IPostsService postsService, ICoverLetterService coverLetterService)
         {
             this.postsService = postsService;
+            this.coverLetterService = coverLetterService;
         }
 
         public IActionResult Index()
@@ -36,7 +39,11 @@
 
         public IActionResult About()
         {
-            return this.View();
+            var coverLetter = this.coverLetterService
+                .GetAll<CoverLetterViewModel>()
+                .ToList();
+
+            return this.View(coverLetter);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

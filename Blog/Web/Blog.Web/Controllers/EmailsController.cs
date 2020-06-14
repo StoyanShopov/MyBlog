@@ -1,13 +1,10 @@
 ﻿namespace Blog.Web.Controllers
 {
-    using System;
     using System.Threading.Tasks;
 
     using Blog.Services.Messaging;
     using Blog.Web.ViewModels.Emails.InputModels;
     using Blog.Web.ViewModels.Emails.ViewModels;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]

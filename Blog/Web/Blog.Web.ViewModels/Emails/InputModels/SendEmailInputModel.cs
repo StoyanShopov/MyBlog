@@ -1,9 +1,5 @@
 ﻿namespace Blog.Web.ViewModels.Emails.InputModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     public class SendEmailInputModel
     {
         public string Name { get; set; }

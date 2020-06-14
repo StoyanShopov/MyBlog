@@ -5,7 +5,6 @@
 
     using Blog.Data.Common.Repositories;
     using Blog.Data.Models;
-    using Blog.Services.Data;
     using Blog.Services.Data.Contracts;
     using Blog.Web.ViewModels.Settings;
     using Microsoft.AspNetCore.Mvc;
