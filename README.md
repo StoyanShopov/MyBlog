@@ -1,5 +1,4 @@
 ## Build
-https://dev.azure.com/StoyanShopov/StoyanShopov/_apis/build/status/StoyanShopov.MyBlog?branchName=master&jobName=Job
 [![Build Status](https://dev.azure.com/StoyanShopov/StoyanShopov/_apis/build/status/StoyanShopov.MyBlog?branchName=master&jobName=Job)](https://dev.azure.com/StoyanShopov/StoyanShopov/_build/latest?definitionId=1&branchName=master)
 
 ## Back End
