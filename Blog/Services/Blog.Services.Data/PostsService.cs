@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using AngleSharp.Css.Values;
     using Blog.Data.Common.Repositories;
     using Blog.Data.Models;
     using Blog.Services.Data.Common;
@@ -41,7 +41,7 @@
             var imageUrl = await ApplicationCloudinary
                 .UploadViaFromFile(this.cloudinary, inputModel.Image, inputModel.Title);
 
-            var newUrls = await this.GetImageUrlsAsync(inputModel.Description);
+            var newUrls = await ApplicationCloudinary.GetImageUrlsAsync(cloudinary, inputModel.Description);
 
             var updatedContent = await AngleSharpExtension
                 .UpdateImageSourceAsync(newUrls.ToList(), inputModel.Description);
@@ -149,7 +149,11 @@
 
         public async Task<int> EditAsync(EditPostInputModel inputModel)
         {
-            var post = await this.postRepository.GetByIdWithDeletedAsync(inputModel.Id);
+            var post = this.postRepository
+                .All()
+                .Include(t => t.TagPosts)
+                .ThenInclude(x => x.Tag)
+                .FirstOrDefault(x => x.Id == inputModel.Id);
 
             post.Title = inputModel.Title;
             post.Description = inputModel.Description;
@@ -178,17 +182,7 @@
 
             foreach (var tagName in tags)
             {
-                var currentTag = this.tagRepository
-                    .AllAsNoTracking()
-                    .FirstOrDefault(x => x.Name == tagName);
-
-                if (currentTag == null)
-                {
-                    currentTag = new Tag
-                    {
-                        Name = tagName,
-                    };
-                }
+                var currentTag = this.GetOrCreateTag(tagName);
 
                 if (post.TagPosts.All(x => x.Tag.Name != tagName))
                 {
@@ -204,22 +198,17 @@
             return post.Id;
         }
 
-        private async Task<IEnumerable<string>> GetImageUrlsAsync(string inputModelDescription)
+        private Tag GetOrCreateTag(string tagName)
         {
-            var images = await AngleSharpExtension
-                .GetImageSourceAsync(inputModelDescription);
+            var tag = this.tagRepository
+                .AllAsNoTracking()
+                .FirstOrDefault(x => x.Name == tagName)
+                      ?? new Tag
+                      {
+                          Name = tagName,
+                      };
 
-            var newUrls = new List<string>();
-
-            foreach (var imgSrc in images)
-            {
-                var url = await ApplicationCloudinary
-                    .UploadImageViaLink(this.cloudinary, imgSrc, Guid.NewGuid().ToString());
-
-                newUrls.Add(url);
-            }
-
-            return newUrls;
+            return tag;
         }
     }
 }

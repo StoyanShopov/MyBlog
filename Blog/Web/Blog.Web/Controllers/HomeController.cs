@@ -2,11 +2,12 @@
 {
     using System.Diagnostics;
     using System.Linq;
+
     using Blog.Services.Data.Contracts;
     using Blog.Web.ViewModels;
+    using Blog.Web.ViewModels.Administration.CoverLetter.ViewModels;
     using Blog.Web.ViewModels.Posts.ViewModels;
     using Microsoft.AspNetCore.Mvc;
-    using ViewModels.Administration.CoverLetter.ViewModels;
 
     public class HomeController : BaseController
     {
@@ -27,11 +28,6 @@
             return this.View(latestPosts);
         }
 
-        public IActionResult Privacy()
-        {
-            return this.View();
-        }
-
         public IActionResult Contacts()
         {
             return this.View();
@@ -40,8 +36,7 @@
         public IActionResult About()
         {
             var coverLetter = this.coverLetterService
-                .GetAll<CoverLetterViewModel>()
-                .ToList();
+                .Get<CoverLetterViewModel>();
 
             return this.View(coverLetter);
         }

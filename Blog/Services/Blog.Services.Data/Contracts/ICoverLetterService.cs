@@ -9,10 +9,10 @@
     {
         Task CreateAsync(CreateCoverLetterInputModel inputModel);
 
-        Task<int> EditAsync(EditCoverLetterInputModel inputModel);
+        Task EditAsync(EditCoverLetterInputModel inputModel);
 
         Task DeleteAsync(int id);
 
-        IEnumerable<TModel> GetAll<TModel>();
+        TModel Get<TModel>();
     }
 }

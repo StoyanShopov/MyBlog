@@ -12,44 +12,52 @@
     using Blog.Services.Data.Contracts;
     using Blog.Services.Mapping;
     using Blog.Web.ViewModels.Administration.CoverLetter.InputModels;
+    using CloudinaryDotNet;
+    using Common;
 
     public class CoverLetterService : ICoverLetterService
     {
         private readonly IDeletableEntityRepository<CoverLetter> coverLetterRepository;
+        private readonly Cloudinary cloudinary;
 
-        public CoverLetterService(IDeletableEntityRepository<CoverLetter> coverLetterRepository)
+        public CoverLetterService(IDeletableEntityRepository<CoverLetter> coverLetterRepository, Cloudinary cloudinary)
         {
             this.coverLetterRepository = coverLetterRepository;
+            this.cloudinary = cloudinary;
         }
 
         public async Task CreateAsync(CreateCoverLetterInputModel inputModel)
-        {
+        { 
+            var newUrls = await ApplicationCloudinary
+                .GetImageUrlsAsync(this.cloudinary, inputModel.Content);
+
+            var updatedContent = await AngleSharpExtension
+                .UpdateImageSourceAsync(newUrls.ToList(), inputModel.Content);
+
             var coverLetter = new CoverLetter
             {
-                Title = inputModel.Title,
-                Content = inputModel.Content,
-                StartDate = inputModel.StartDate,
-                EndDate = inputModel.EndDate,
-                ImageUrl = inputModel.ImageUrl,
+                Content = updatedContent,
             };
 
             await this.coverLetterRepository.AddAsync(coverLetter);
             await this.coverLetterRepository.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(EditCoverLetterInputModel inputModel)
+        public async Task EditAsync(EditCoverLetterInputModel inputModel)
         {
-            var coverLetter = await this.coverLetterRepository.GetByIdWithDeletedAsync(inputModel.Id);
+            var coverLetter = this.coverLetterRepository
+                .All()
+                .FirstOrDefault();
 
-            coverLetter.Title = inputModel.Title;
-            coverLetter.Content = inputModel.Content;
-            coverLetter.StartDate = inputModel.StartDate;
-            coverLetter.EndDate = inputModel.EndDate;
-            coverLetter.ImageUrl = inputModel.ImageUrl;
+            var newUrls = await ApplicationCloudinary
+                .GetImageUrlsAsync(this.cloudinary, inputModel.Content);
+
+            var updatedContent = await AngleSharpExtension
+                .UpdateImageSourceAsync(newUrls.ToList(), inputModel.Content);
+
+            coverLetter.Content = updatedContent;
 
             await this.coverLetterRepository.SaveChangesAsync();
-
-            return coverLetter.Id;
         }
 
         public async Task DeleteAsync(int id)
@@ -57,14 +65,14 @@
             var coverLetter = await this.coverLetterRepository.GetByIdWithDeletedAsync(id);
 
             this.coverLetterRepository.Delete(coverLetter);
+
             await this.coverLetterRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<TModel> GetAll<TModel>()
+        public TModel Get<TModel>()
             => this.coverLetterRepository
-                .AllAsNoTracking()
-                .OrderByDescending(x => x.CreatedOn)
+                .All()
                 .To<TModel>()
-                .ToList();
+                .FirstOrDefault();
     }
 }

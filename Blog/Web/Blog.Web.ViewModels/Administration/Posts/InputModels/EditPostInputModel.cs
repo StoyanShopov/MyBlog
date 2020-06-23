@@ -11,16 +11,16 @@
 
     public class EditPostInputModel : IMapFrom<Post>, IHaveCustomMappings
     {
-        private const string TitleLengthMessage = "Title must be between 4 and 10 (including) symbols!";
+        private const string TitleLengthMessage = "Title must be between 4 and 30 (including) symbols!";
         private const string DescriptionErrorMessage = "Description must be at least 250 symbols!";
-        private const string ShortDescriptionErrorMessage = "Short descriptionbetween 200 and 250 symbols!";
-        private const string TagsErrorMessage = "Tags must be between 4 and 30 (including) symbols!";
+        private const string ShortDescriptionErrorMessage = "Short description between 50 and 600 symbols!";
+        private const string TagsErrorMessage = "Tags must be between 2 and 30 (including) symbols!";
 
         public int Id { get; set; }
 
         [DataType(DataType.Text)]
         [Required(ErrorMessage = ValidationConstants.NullOrEmptyField)]
-        [StringLength(10, MinimumLength = 4, ErrorMessage = TitleLengthMessage)]
+        [StringLength(30, MinimumLength = 4, ErrorMessage = TitleLengthMessage)]
         public string Title { get; set; }
 
         [DataType(DataType.Upload)]
@@ -33,7 +33,7 @@
 
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = ValidationConstants.NullOrEmptyField)]
-        [StringLength(100, MinimumLength = 50, ErrorMessage = ShortDescriptionErrorMessage)]
+        [StringLength(600, MinimumLength = 50, ErrorMessage = ShortDescriptionErrorMessage)]
         [Display(Name = "Short Description")]
         public string ShortDescription { get; set; }
 
@@ -43,7 +43,7 @@
 
         [DataType(DataType.Text)]
         [Required(ErrorMessage = ValidationConstants.NullOrEmptyField)]
-        [StringLength(30, MinimumLength = 4, ErrorMessage = TagsErrorMessage)]
+        [StringLength(30, MinimumLength = 2, ErrorMessage = TagsErrorMessage)]
         public string Tags { get; set; }
 
         public string ImageUrl { get; set; }

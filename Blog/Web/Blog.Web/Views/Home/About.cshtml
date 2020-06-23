@@ -1,6 +1,6 @@
 ﻿@using System.Globalization
 @using Blog.Web.ViewModels.Common
-@model IEnumerable<Blog.Web.ViewModels.Administration.CoverLetter.ViewModels.CoverLetterViewModel>;
+@model Blog.Web.ViewModels.Administration.CoverLetter.ViewModels.CoverLetterViewModel;
 @{
     this.ViewData["Title"] = "About Me";
     var isAdmin = this.User.IsInRole("Administrator");
@@ -17,32 +17,7 @@
 
 <div class="row">
     <div class="container bg-white">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-xl-12 mt-3 shadow border rounded-lg">
-                    <div class="row">
-                        <div class="col-4">
-                            <img src="@item.ImageUrl" class="img-post-all mt-2 mb-2 rounded">
-                        </div>
-                        <div class="bg-white col-8 mt-2">
-                            <h3 class="h4">@item.Title</h3>
-                            <div class="text-break">@item.Content</div>
-
-                            <div class="d-flex mt-4">
-                                @item.StartDate - @(item.EndDate.HasValue ? $"{item.EndDate}" : "Present")
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                @if (isAdmin)
-                {
-                    <a asp-area="Administration" asp-controller="CoverLetter" asp-action="Edit" class="btn btn-primary">Edit</a>
-                    <a asp-area="Administration" asp-controller="CoverLetter" asp-action="Delete" class="btn btn-primary">Delete</a>
-                }
-            }
-        </div>
+        @Html.Raw(Model.SanitizedContent())
     </div>
 </div>
 

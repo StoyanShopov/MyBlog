@@ -1,5 +1,6 @@
 ﻿namespace Blog.Services.Data.Common
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
@@ -49,6 +50,24 @@
             await cloudinary.DeleteDerivedResourcesAsync(delParams);
         }
 
+        public static async Task<IEnumerable<string>> GetImageUrlsAsync(Cloudinary cloudinary, string inputModelDescription)
+        {
+            var images = await AngleSharpExtension
+                .GetImageSourceAsync(inputModelDescription);
+
+            var newUrls = new List<string>();
+
+            foreach (var imgSrc in images)
+            {
+                var url = await ApplicationCloudinary
+                    .UploadImageViaLink(cloudinary, imgSrc, Guid.NewGuid().ToString());
+
+                newUrls.Add(url);
+            }
+
+            return newUrls;
+        }
+
         private static async Task<string> UploadAsync(Cloudinary cloudinary, byte[] bytes, string name)
         {
             await using var ms = new MemoryStream(bytes);
@@ -66,5 +85,6 @@
 
             return uploadResult?.SecureUri.AbsoluteUri;
         }
+
     }
 }

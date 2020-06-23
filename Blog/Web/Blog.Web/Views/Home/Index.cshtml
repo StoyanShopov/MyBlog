@@ -21,32 +21,32 @@
         <div class="col-lg-11 col-md-10 mx-auto">
             @foreach (var post in this.Model)
             {
-                <div class="post-preview">
-                    <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-postId="@post.Id">
-                        <h2 class="post-title">
-                            @post.Title
-                        </h2>
-                    </a>
-                    <div class="row text-break">
-                        <div class="col-6">
-                            <div class="mt-1 mb-2">
-                                <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-postId="@post.Id">
-                                    <img src="@post.ImageUrl" class="index-fit-image shadow-lg" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <p>
-                                @post.ShortDescription
-                            </p>
+            <div class="post-preview">
+                <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-postId="@post.Id">
+                    <h2 class="post-title">
+                        @post.Title
+                    </h2>
+                </a>
+                <div class="row text-break">
+                    <div class="col-6">
+                        <div class="mt-1 mb-2">
+                            <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-postId="@post.Id">
+                                <img src="@post.ImageUrl" class="index-fit-image shadow-lg" />
+                            </a>
                         </div>
                     </div>
-                    <p class="post-meta">
-                        Posted by
-                        <a href="#">Stoyan Shopoff</a>
-                        on @post.CreatedOn.Date.Day @post.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture) @post.CreatedOn.Date.Year
-                    </p>
+                    <div class="col-6">
+                        <p>
+                            @post.ShortDescription
+                        </p>
+                    </div>
                 </div>
+                <p class="post-meta">
+                    Posted by
+                    <a asp-area="" asp-controller="Home" asp-action="Abour">Stoyan Shopoff</a>
+                    on @post.CreatedOn.Date.Day @post.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture) @post.CreatedOn.Date.Year
+                </p>
+            </div>
                 <hr>
             }
             <div>

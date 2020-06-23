@@ -2,7 +2,7 @@
 @model Blog.Web.ViewModels.Administration.CoverLetter.InputModels.CreateCoverLetterInputModel
 
 @{
-    this.ViewData["Title"] = "Add Job";
+    this.ViewData["Title"] = "Add CV";
 
     var categories = this.ViewData["AllCategories"] as IEnumerable<SelectListItem>;
 }
@@ -15,38 +15,27 @@
 })
 <vc:header></vc:header>
 
+
 <div class="container mt-4">
-    <form enctype="multipart/form-data" asp-area="Administration" asp-controller="CoverLetter" asp-action="Add" method="post">
-        <div class="form-group">
-            <label asp-for="@Model.Title"></label>
-            <input class="form-control" asp-for="@Model.Title">
-            <span asp-validation-for="@Model.Title" class="text-danger"></span>
-        </div>
+    <form asp-area="Administration" asp-controller="CoverLetter" asp-action="Add" method="post">
         <div class="form-group">
             <label asp-for="@Model.Content"></label>
             <textarea asp-for="@Model.Content" class="form-control" rows="30"></textarea>
             <span asp-validation-for="@Model.Content" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="@Model.StartDate"></label>
-            <input asp-for="@Model.StartDate" class="form-control"/>
-            <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.EndDate"></label>
-            <input asp-for="@Model.EndDate" class="form-control"/>
-            <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.ImageUrl"></label>
-            <input asp-for="@Model.ImageUrl" class="form-control" />
-            <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
-        </div>
-        <br />
         <button type="submit" class="btn btn-primary btn-lg btn-block">Add</button>
     </form>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: "#Content",
+            plugins: [
+                "image paste table link code media"
+            ]
+        });
+    </script>
 }

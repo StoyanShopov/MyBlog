@@ -19,7 +19,7 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult<ResponseEmailModel>> Post(SendEmailInputModel inputModel)
+        public async Task<ActionResult> Post(SendEmailInputModel inputModel)
         {
             const string myEmail = "stoyanshopov032@gmail.com";
 
@@ -30,10 +30,7 @@
                 inputModel.Subject,
                 inputModel.Message);
 
-            return new ResponseEmailModel
-            {
-                Status = "200",
-            };
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

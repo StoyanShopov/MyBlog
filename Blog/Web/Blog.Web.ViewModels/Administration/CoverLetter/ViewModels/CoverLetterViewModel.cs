@@ -2,20 +2,22 @@
 {
     using System;
     using Data.Models;
+    using Ganss.XSS;
     using Services.Mapping;
 
     public class CoverLetterViewModel : IMapFrom<CoverLetter>
     {
-        public int Id { get; set; }
-
-        public string Title { get; set; }
-
         public string Content { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public string SanitizedContent()
+        {
+            var sanitizer = new HtmlSanitizer();
 
-        public DateTime? EndDate { get; set; }
+            sanitizer.AllowedTags.Add("iframe");
+            sanitizer.AllowedTags.Add("src");
+            sanitizer.AllowedTags.Add("allowfullscreen");
 
-        public string ImageUrl { get; set; }
+            return sanitizer.Sanitize(this.Content);
+        }
     }
 }
