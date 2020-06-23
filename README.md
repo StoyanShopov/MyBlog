@@ -1,3 +1,6 @@
+## Build
+[![Build Status](https://dev.azure.com/StoyanShopov/StoyanShopov/_apis/build/status/StoyanShopov.MyBlog?branchName=master&jobName=Job)](https://dev.azure.com/StoyanShopov/StoyanShopov/_apis/build/status/StoyanShopov.MyBlog?branchName=master&jobName=Job)
+
 ## Back End
 - ASP.NET Core 3.1
 - Entity Framework 3.1
