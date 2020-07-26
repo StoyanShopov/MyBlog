@@ -28,11 +28,6 @@
             return this.View(latestPosts);
         }
 
-        public IActionResult Contacts()
-        {
-            return this.View();
-        }
-
         public IActionResult About()
         {
             var coverLetter = this.coverLetterService

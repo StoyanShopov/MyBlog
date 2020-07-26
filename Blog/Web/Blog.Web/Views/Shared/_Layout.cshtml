@@ -34,9 +34,6 @@
                         <a class="navbar-brand" asp-area="" asp-controller="Posts" asp-action="All">Posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Contacts">Contacts</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="About">About Me</a>
                     </li>
                     @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
@@ -48,7 +45,7 @@
                             <a class="navbar-brand" asp-area="Administration" asp-controller="Categories" asp-action="Create">Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="navbar-brand" asp-area="Administration" asp-controller="CoverLetter" asp-action="Add">Job</a>
+                            <a class="navbar-brand" asp-area="Administration" asp-controller="CoverLetter" asp-action="Create">Cover Letter</a>
                         </li>
                     }
                 </ul>

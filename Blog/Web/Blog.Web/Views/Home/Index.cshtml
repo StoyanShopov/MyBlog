@@ -9,8 +9,8 @@
 
 @await Component.InvokeAsync("Header", new HeaderViewModel
 {
-    Title = "Stoyan Shopoff Blog",
-    Content = "A Blog For My Stories",
+    Title = "Stoyan Shopoff",
+    Content = "Blog",
     ImageUrl = "https://miro.medium.com/max/960/1*PaZT9QBa-Dt9K9FE9-CkbA.jpeg",
 })
 <vc:header ></vc:header>
@@ -43,7 +43,7 @@
                 </div>
                 <p class="post-meta">
                     Posted by
-                    <a asp-area="" asp-controller="Home" asp-action="Abour">Stoyan Shopoff</a>
+                    <a asp-area="" asp-controller="Home" asp-action="About">Stoyan Shopoff</a>
                     on @post.CreatedOn.Date.Day @post.CreatedOn.Date.ToString("MMM", CultureInfo.InvariantCulture) @post.CreatedOn.Date.Year
                 </p>
             </div>

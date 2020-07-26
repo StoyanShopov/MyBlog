@@ -8,7 +8,6 @@
     using Blog.Data.Models;
     using Blog.Services.Data.Contracts;
     using Blog.Services.Mapping;
-    using Microsoft.EntityFrameworkCore;
 
     public class CategoriesService : ICategoriesService
     {
@@ -21,9 +20,9 @@
 
         public async Task CreateAsync(string name)
         {
-            var categoryExists = await this.categoryRepository
+            var categoryExists = this.categoryRepository
                 .AllAsNoTracking()
-                .AnyAsync(x => x.Name == name);
+                .Any(x => x.Name == name);
 
             if (categoryExists)
             {

@@ -1,5 +1,7 @@
 ﻿namespace Blog.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -9,6 +11,7 @@
     using Blog.Web.ViewModels.Administration.Posts.InputModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using ViewModels.Posts.ViewModels;
 
     [Area("Administration")]
     public class PostsController : AdministrationController
@@ -85,6 +88,33 @@
                 .EditAsync(inputModel);
 
             return this.RedirectToAction("Details", "Posts", new { postId, area = string.Empty });
+        }
+
+        public async Task<IActionResult> Delete(int postId)
+        {
+            await this.postsService.RemoveAsync(postId);
+
+            return this.RedirectToAction("All");
+        }
+
+        public IActionResult All(int page = 1, int perPage = 9)
+        {
+            var postsCount = this.postsService.TotalPosts;
+
+            var allPosts = this.postsService
+                .GetByPage<IndexPostViewModel>(page, perPage)
+                .ToList();
+
+            var pagesCount = (int)Math.Ceiling(postsCount / (decimal)perPage);
+
+            var model = new AllPostViewModel
+            {
+                Posts = allPosts,
+                CurrentPage = page,
+                PagesCount = pagesCount,
+            };
+
+            return this.View(model);
         }
     }
 }

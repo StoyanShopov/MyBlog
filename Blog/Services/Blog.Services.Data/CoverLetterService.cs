@@ -1,33 +1,33 @@
 ﻿namespace Blog.Services.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.Tracing;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
     using Blog.Data.Common.Repositories;
     using Blog.Data.Models;
+    using Blog.Services.Data.Common;
     using Blog.Services.Data.Contracts;
     using Blog.Services.Mapping;
     using Blog.Web.ViewModels.Administration.CoverLetter.InputModels;
+
     using CloudinaryDotNet;
-    using Common;
 
     public class CoverLetterService : ICoverLetterService
     {
         private readonly IDeletableEntityRepository<CoverLetter> coverLetterRepository;
         private readonly Cloudinary cloudinary;
 
-        public CoverLetterService(IDeletableEntityRepository<CoverLetter> coverLetterRepository, Cloudinary cloudinary)
+        public CoverLetterService(
+            IDeletableEntityRepository<CoverLetter> coverLetterRepository,
+            Cloudinary cloudinary)
         {
             this.coverLetterRepository = coverLetterRepository;
             this.cloudinary = cloudinary;
         }
 
         public async Task CreateAsync(CreateCoverLetterInputModel inputModel)
-        { 
+        {
             var newUrls = await ApplicationCloudinary
                 .GetImageUrlsAsync(this.cloudinary, inputModel.Content);
 
@@ -62,7 +62,8 @@
 
         public async Task DeleteAsync(int id)
         {
-            var coverLetter = await this.coverLetterRepository.GetByIdWithDeletedAsync(id);
+            var coverLetter = await this.coverLetterRepository
+                .GetByIdWithDeletedAsync(id);
 
             this.coverLetterRepository.Delete(coverLetter);
 

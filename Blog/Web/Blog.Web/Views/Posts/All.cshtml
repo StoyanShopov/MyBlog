@@ -16,7 +16,7 @@
 })
 <vc:header></vc:header>
 
-<div class="row" style="background-image: url('https://res.cloudinary.com/dmvrh3bvc/image/upload/v1592308058/216-2165475_connection-png-page-connected-lines-background-png-transparent_kptklf.png')">
+<div class="row">
     <div class="container bg-white">
         <div class="row">
             @foreach (var item in Model.Posts)
@@ -54,5 +54,4 @@
 
 @await Component.InvokeAsync("PostPagination", new { page = Model.CurrentPage })
 <vc:post-pagination></vc:post-pagination>
-<partial name="_TagPartial" />
 <hr />

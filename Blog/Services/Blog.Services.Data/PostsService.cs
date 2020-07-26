@@ -17,7 +17,6 @@
     public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<Post> postRepository;
-        private readonly IDeletableEntityRepository<Category> categoryRepository;
         private readonly IDeletableEntityRepository<Tag> tagRepository;
         private readonly Cloudinary cloudinary;
 
@@ -28,7 +27,6 @@
             Cloudinary cloudinary)
         {
             this.postRepository = postRepository;
-            this.categoryRepository = categoryRepository;
             this.tagRepository = tagRepository;
             this.cloudinary = cloudinary;
         }
@@ -41,7 +39,8 @@
             var imageUrl = await ApplicationCloudinary
                 .UploadViaFromFile(this.cloudinary, inputModel.Image, inputModel.Title);
 
-            var newUrls = await ApplicationCloudinary.GetImageUrlsAsync(cloudinary, inputModel.Description);
+            var newUrls = await ApplicationCloudinary
+                .GetImageUrlsAsync(this.cloudinary, inputModel.Description);
 
             var updatedContent = await AngleSharpExtension
                 .UpdateImageSourceAsync(newUrls.ToList(), inputModel.Description);

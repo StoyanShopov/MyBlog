@@ -16,7 +16,7 @@
             this.coverLetterService = coverLetterService;
         }
 
-        public IActionResult Add()
+        public IActionResult Create()
         {
             var cv = this.coverLetterService.Get<CoverLetterViewModel>();
 
@@ -29,7 +29,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(CreateCoverLetterInputModel model)
+        public async Task<IActionResult> Create(CreateCoverLetterInputModel model)
         {
             if (!this.ModelState.IsValid)
             {
